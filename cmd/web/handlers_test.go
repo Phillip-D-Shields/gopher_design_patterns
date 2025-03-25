@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestApplication_GetAllDogVBreedsJSON(t *testing.T) {
+func TestApplication_GetAllDogBreedsJSON(t *testing.T) {
 	// create request
 	req, _ := http.NewRequest("GET", "/api/dog-breeds", nil)
 	// response recorder
@@ -22,4 +22,22 @@ func TestApplication_GetAllDogVBreedsJSON(t *testing.T) {
 	if rr.Code != http.StatusOK {
 		t.Errorf("wrong response code: got %d, wanted 200", rr.Code)
 	}
+}
+
+func TestApplication_GetAllCatBreedsXML(t *testing.T) {
+		// create request
+		req, _ := http.NewRequest("GET", "/api/cat-breeds", nil)
+		// response recorder
+		rr := httptest.NewRecorder()
+	
+		// handler
+		handler := http.HandlerFunc(testApp.GetAllCatBreeds)
+	
+		// serve hamdler
+		handler.ServeHTTP(rr, req)
+	
+		// check response\
+		if rr.Code != http.StatusOK {
+			t.Errorf("wrong response code: got %d, wanted 200", rr.Code)
+		}
 }
